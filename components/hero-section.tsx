@@ -18,7 +18,7 @@ export function HeroSection({
   ctaButtons
 }: HeroSectionProps) {
   return (
-    <section className="relative w-full h-[500px] md:h-[600px] overflow-hidden">
+    <section className="relative w-full h-[350px] md:h-[450px] overflow-hidden">
       <ImageCarousel images={images} autoPlay interval={5000} className="h-full" />
 
       {/* Overlay */}

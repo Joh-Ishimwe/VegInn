@@ -5,7 +5,7 @@ import { HeroSection } from '@/components/hero-section'
 
 export default function About() {
   const heroImages = [
-    '/farmer-1.jpg',
+    '/vegetables-2.png',
     // '/vegetables-1.jpg',
     // '/farmer-2.jpg'
   ]

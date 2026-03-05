@@ -40,8 +40,8 @@ export default function Contact() {
             <div className="bg-card p-6 text-center text-card-foreground shadow-md border border-border">
               <div className="mb-3 text-3xl text-primary">📞</div>
               <h3 className="mb-2 text-sm font-bold uppercase tracking-wide">Phone Number</h3>
-              <a href="tel:+250788000000" className="text-sm text-muted-foreground hover:text-primary">
-                +250 788 000 000
+              <a href="tel:+250786866111" className="text-sm text-muted-foreground hover:text-primary">
+                +250 786 866 111
               </a>
             </div>
 
@@ -49,9 +49,8 @@ export default function Contact() {
               <div className="mb-3 text-3xl text-primary">#</div>
               <h3 className="mb-2 text-sm font-bold uppercase tracking-wide">Social Media</h3>
               <div className="flex justify-center gap-4 text-sm text-muted-foreground">
-                <a href="#" className="hover:text-primary">Facebook</a>
-                <a href="#" className="hover:text-primary">X</a>
-                <a href="#" className="hover:text-primary">LinkedIn</a>
+                <a href="https://www.instagram.com/veg__inn?igsh=YXc4aTRuZG91aHp5&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:text-primary">Instagram</a>
+                <a href="https://www.tiktok.com/@veg_inn?_r=1&_t=ZS-94QyxC6xVeK" target="_blank" rel="noopener noreferrer" className="hover:text-primary">TikTok</a>
               </div>
             </div>
 

@@ -13,13 +13,13 @@ const EcosystemMap = dynamic(() => import('@/components/EcosystemMap'), {
 
 export default function Home() {
   const heroImages = [
-    '/vegetables-1.jpg',
-    '/vegetables-2.jpg',
-    '/vegetables-3.jpg'
+    '/vegetables-1.png',
+    '/vegetables-2.png',
+    '/vegetables-3.png'
   ]
   const distributorImages = [
     '/distributor-1.jpg',
-    '/distributor-2.jpg'
+    '/distributor-2.png'
   ]
 
   return (
@@ -47,19 +47,19 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <ProductCard
-              image="/vegetables-1.jpg"
+              image="/vegetables-1.png"
               title="Fresh Leafy Greens"
               description="Premium quality kale, spinach, and lettuce sourced directly from certified farmers."
               readMoreUrl="#"
             />
             <ProductCard
-              image="/vegetables-2.jpg"
+              image="/vegetables-2.png"
               title="Root Vegetables"
               description="Fresh tomatoes, carrots, and seasonal root crops, handled with professional care."
               readMoreUrl="#"
             />
             <ProductCard
-              image="/vegetables-3.jpg"
+              image="/vegetables-3.png"
               title="Specialty Produce"
               description="Seasonal vegetables selected for quality, nutrition, and market demand."
               readMoreUrl="#"

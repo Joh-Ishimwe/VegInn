@@ -3,7 +3,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin } from 'lucide-react'
+import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react'
 
 export function Footer() {
   return (
@@ -41,13 +41,13 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-sm mb-4">Contact</h4>
             <div className="flex flex-col gap-3">
-              <a href="tel:+250123456789" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition">
+              <a href="tel:+250786866111" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition">
                 <Phone size={16} />
-                +250 123 456 789
+                +250 786 866 111
               </a>
-              <a href="mailto:info@veginn.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition">
+              <a href="mailto:info@veginn.rw" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition">
                 <Mail size={16} />
-                info@veginn.com
+                info@veginn.rw
               </a>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin size={16} />
@@ -60,14 +60,11 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-sm mb-4">Follow Us</h4>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition">
-                <Facebook size={20} />
+              <a href="https://www.instagram.com/veg__inn?igsh=YXc4aTRuZG91aHp5&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition">
+                <Instagram size={20} />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition">
+              <a href="https://www.tiktok.com/@veg_inn?_r=1&_t=ZS-94QyxC6xVeK" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition">
                 <Twitter size={20} />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition">
-                <Linkedin size={20} />
               </a>
             </div>
           </div>
