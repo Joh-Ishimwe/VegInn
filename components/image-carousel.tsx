@@ -1,3 +1,4 @@
+// /components/image-carousel.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -22,7 +23,7 @@ export function ImageCarousel({
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
-    if (!autoPlay) return
+    if (!autoPlay || images.length <= 1) return
 
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length)
@@ -55,32 +56,36 @@ export function ImageCarousel({
         ))}
       </div>
 
-      {/* Navigation Buttons */}
-      <button
-        onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition"
-      >
-        <ChevronLeft size={24} />
-      </button>
-      <button
-        onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition"
-      >
-        <ChevronRight size={24} />
-      </button>
-
-      {/* Dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {images.map((_, index) => (
+      {/* Navigation Buttons - Only show if there are multiple images */}
+      {images.length > 1 && (
+        <>
           <button
-            key={index}
-            onClick={() => setCurrent(index)}
-            className={`w-2 h-2 rounded-full transition ${
-              index === current ? 'bg-white' : 'bg-white/50'
-            }`}
-          />
-        ))}
-      </div>
+            onClick={prev}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          {/* Dots */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrent(index)}
+                className={`w-2 h-2 rounded-full transition ${
+                  index === current ? 'bg-white' : 'bg-white/50'
+                }`}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   )
 }

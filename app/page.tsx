@@ -1,3 +1,4 @@
+// /app/page.tsx
 'use client'
 
 import { HeroSection } from '@/components/hero-section'
@@ -13,8 +14,7 @@ export default function Home() {
   ]
 
   const farmerImages = [
-    '/farmer-1.jpg',
-    '/farmer-2.jpg'
+    '/farmer-1.jpg'
   ]
 
   const distributorImages = [
@@ -28,8 +28,9 @@ export default function Home() {
       {/* Hero Section */}
       <HeroSection
         images={heroImages}
-        title="Connecting Farmers to Modern Markets"
-        subtitle="Premium vegetables from smallholder farmers to your retail shelves"
+        title="Strengthening Rwanda’s Vegetable Value Chain"
+        subtitle="We connect smallholder farmers to modern retail markets through professional aggregation, quality assurance, and reliable distribution."
+      
         ctaButtons={[
           { label: 'Partner With Us', href: '#partnership', variant: 'default' },
           // { label: 'Learn More', href: '#about', variant: 'outline' }
@@ -41,7 +42,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Products</h2>
-            <p className="text-muted-foreground text-lg">Fresh, quality vegetables from our network of smallholder farmers</p>
+            <p className="text-muted-foreground text-lg">Fresh, carefully handled vegetables sourced from trusted smallholder farmers across Rwanda.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -69,13 +70,19 @@ export default function Home() {
 
       {/* Who We Are Section */}
       <section className="py-16 md:py-24 bg-secondary/30">
-        <div className="text-center max-w-6xl mx-auto px-4 md:px-6">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">VegInn</h2>
-              <p className="text-muted-foreground text-lg mb-4">
-                VegInn is a social enterprise committed to transforming Rwanda's vegetable value chain. We bridge the gap between smallholder farmers and modern retail markets through professional post-harvest handling and structured market access.
-              </p>
-            </div>
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="text-center max-w-5xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary tracking-wide">
+              VEGINN
+            </h2>
+            <div className="w-full h-px bg-border mb-8"></div>
+            <p className="text-muted-foreground text-lg leading-relaxed italic px-4 mb-4">
+              VegInn is a Rwandan agricultural enterprise dedicated to strengthening the vegetable value chain. We aggregate produce from smallholder farmers, apply professional post-harvest handling practices, and distribute to modern retail markets including supermarkets, restaurants, and institutional buyers.
+            </p>
+            <p className="text-muted-foreground text-lg leading-relaxed italic px-4">
+              By combining structured market access, quality control systems, and transparent pricing, we create a reliable supply chain that benefits farmers, retailers, and consumers alike.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -84,7 +91,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Ecosystem</h2>
-            <p className="text-muted-foreground text-lg">Join our network of farmers and distributors</p>
+            <p className="text-muted-foreground text-lg">Be part of a structured agricultural ecosystem built on quality, fairness, and long-term partnerships.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
