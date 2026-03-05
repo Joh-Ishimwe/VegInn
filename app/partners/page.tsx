@@ -20,12 +20,7 @@ export default function Partners() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Hero Section */}
-      <HeroSection
-        images={heroImages}
-        title="Our Ecosystem"
-        subtitle="Building sustainable partnerships across Rwanda's agricultural value chain"
-      />
+      
 
       
       {/* Overlay Cards - Farmers & Retailers */}
