@@ -1,10 +1,15 @@
 // /app/page.tsx
 'use client'
 
+import dynamic from 'next/dynamic'
 import { HeroSection } from '@/components/hero-section'
 import { ProductCard } from '@/components/product-card'
 import { OverlayCard } from '@/components/overlay-card'
 import { Button } from '@/components/ui/button'
+
+const EcosystemMap = dynamic(() => import('@/components/EcosystemMap'), {
+  ssr: false,
+})
 
 export default function Home() {
   const heroImages = [
@@ -12,11 +17,6 @@ export default function Home() {
     '/vegetables-2.jpg',
     '/vegetables-3.jpg'
   ]
-
-  const farmerImages = [
-    '/farmer-1.jpg'
-  ]
-
   const distributorImages = [
     '/distributor-1.jpg',
     '/distributor-2.jpg'
@@ -86,27 +86,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Farmers & Distributors Section */}
+      {/* Our Ecosystem Section */}
       <section id="partnership" className="py-16 md:py-24 bg-background">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Ecosystem</h2>
-            <p className="text-muted-foreground text-lg">Be part of a structured agricultural ecosystem built on quality, fairness, and long-term partnerships.</p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <OverlayCard
-              images={farmerImages}
-              title="For Farmers"
-              subtitle="Access modern markets and fair prices"
-              buttonLabel="Become a Partner Farmer"
-              buttonUrl="#"
-            />
+          <div className="grid md:grid-cols-2 gap-10 items-start">
+            <div className="overflow-hidden rounded-2xl border border-border shadow-md">
+              <EcosystemMap />
+            </div>
             <OverlayCard
               images={distributorImages}
-              title="For Distributors"
-              subtitle="Consistent quality produce supply"
-              buttonLabel="Partner With VegInn"
+              title="For Retailers"
+              subtitle="Access quality produce consistently"
               buttonUrl="#"
             />
           </div>

@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
+import 'leaflet/dist/leaflet.css'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
