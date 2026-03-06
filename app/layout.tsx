@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import Script from 'next/script'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
+import { Toaster } from '@/components/ui/toaster'
 import 'leaflet/dist/leaflet.css'
 import './globals.css'
 
@@ -142,6 +143,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <Analytics />
+        <Toaster />
       </body>
     </html>
   )
