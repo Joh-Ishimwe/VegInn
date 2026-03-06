@@ -80,9 +80,7 @@ export default function Home() {
             <p className="text-muted-foreground text-lg leading-relaxed italic px-4 mb-4">
               VegInn is a Rwandan agricultural enterprise dedicated to strengthening the vegetable value chain. We aggregate produce from smallholder farmers, apply professional post-harvest handling practices, and distribute to modern retail markets including supermarkets, restaurants, and institutional buyers.
             </p>
-            <p className="text-muted-foreground text-lg leading-relaxed italic px-4">
-              By combining structured market access, quality control systems, and transparent pricing, we create a reliable supply chain that benefits farmers, retailers, and consumers alike.
-            </p>
+            
           </div>
         </div>
       </section>
