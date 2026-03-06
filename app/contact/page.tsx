@@ -50,6 +50,7 @@ export default function Contact() {
               <h3 className="mb-2 text-sm font-bold uppercase tracking-wide">Social Media</h3>
               <div className="flex justify-center gap-4 text-sm text-muted-foreground">
                 <a href="https://www.instagram.com/veg__inn?igsh=YXc4aTRuZG91aHp5&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:text-primary">Instagram</a>
+                <a href="https://www.linkedin.com/in/veginn" target="_blank" rel="noopener noreferrer" className="hover:text-primary">LinkedIn</a>
                 <a href="https://www.tiktok.com/@veg_inn?_r=1&_t=ZS-94QyxC6xVeK" target="_blank" rel="noopener noreferrer" className="hover:text-primary">TikTok</a>
               </div>
             </div>
