@@ -1,11 +1,56 @@
 // /app/careers/page.tsx
 'use client'
 
+import { useState } from 'react'
 import { HeroSection } from '@/components/hero-section'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { useToast } from '@/hooks/use-toast'
 
 export default function Careers() {
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: ''
+  })
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        toast({
+          title: "✅ Subscribed Successfully!",
+          description: "You'll receive updates on job openings, training programs, and workshops.",
+        })
+        setFormData({ name: '', email: '' }) // Reset form
+      } else {
+        toast({
+          title: "❌ Subscription Failed",
+          description: data.error || "Something went wrong. Please try again.",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      toast({
+        title: "❌ Network Error",
+        description: "Unable to connect. Please check your internet connection.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
   const heroImages = [
     '/farmer-2.jpg'
   ]
@@ -56,13 +101,16 @@ export default function Careers() {
           <p className="text-muted-foreground text-center mb-8">Subscribe to receive updates on new job openings, training programs, and workshops.</p>
           
           <div className="bg-white rounded-lg p-8 shadow-md border border-border">
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-2">Full Name</label>
                 <input 
                   type="text" 
                   placeholder="Your name" 
                   className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  disabled={isSubmitting}
                   required
                 />
               </div>
@@ -73,12 +121,29 @@ export default function Careers() {
                   type="email" 
                   placeholder="your@email.com" 
                   className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  disabled={isSubmitting}
                   required
                 />
               </div>
 
-              <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2 rounded-lg transition-all">
-                Subscribe
+              <Button 
+                type="submit" 
+                className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2 rounded-lg transition-all"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Subscribing...
+                  </span>
+                ) : (
+                  'Subscribe'
+                )}
               </Button>
             </form>
           </div>
