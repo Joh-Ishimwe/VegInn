@@ -1,9 +1,62 @@
 'use client'
 
+import { useState } from 'react'
 import { HeroSection } from '@/components/hero-section'
 import { Button } from '@/components/ui/button'
+import { useToast } from '@/hooks/use-toast'
 
 export default function Partners() {
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    partnerType: '' as 'farmer' | 'retailer' | '',
+    location: '',
+    details: ''
+  })
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/partner', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        toast({
+          title: "✅ Request Submitted Successfully!",
+          description: "We'll contact you within 24-48 hours to discuss the partnership.",
+        })
+        setFormData({ name: '', email: '', phone: '', partnerType: '', location: '', details: '' })
+      } else {
+        toast({
+          title: "❌ Submission Failed",
+          description: data.error || "Something went wrong. Please try again.",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      toast({
+        title: "❌ Network Error",
+        description: "Unable to connect. Please check your internet connection.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const scrollToForm = () => {
+    document.getElementById('partnership-form')?.scrollIntoView({ behavior: 'smooth' })
+  }
   const heroImages = [
     '/ecosystem-1.jpg'
   ]
@@ -69,8 +122,8 @@ export default function Partners() {
                     <span className="text-muted-foreground">Quality improvement programs</span>
                   </li>
                 </ul>
-                <Button className="w-full bg-primary hover:bg-primary/90 text-white" asChild>
-                  <a href="/contact?interest=farmer">Join as Farmer</a>
+                <Button className="w-full bg-primary hover:bg-primary/90 text-white" onClick={scrollToForm}>
+                  Join as Farmer
                 </Button>
               </div>
             </div>
@@ -109,8 +162,8 @@ export default function Partners() {
                     <span className="text-muted-foreground">Professional customer support</span>
                   </li>
                 </ul>
-                <Button className="w-full bg-primary hover:bg-primary/90 text-white" asChild>
-                  <a href="/contact?interest=distributor">Partner With Us</a>
+                <Button className="w-full bg-primary hover:bg-primary/90 text-white" onClick={scrollToForm}>
+                  Partner With Us
                 </Button>
               </div>
             </div>
@@ -157,6 +210,162 @@ export default function Partners() {
               <p className="text-sm text-muted-foreground mb-4">Bulk supply for schools, hospitals, and corporate facilities</p>
               
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partnership Registration Form */}
+      <section id="partnership-form" className="py-16 md:py-24 bg-secondary/30">
+        <div className="max-w-3xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Join VegInn Network</h2>
+            <p className="text-muted-foreground text-lg">
+              Whether you're a farmer looking for market access or a buyer seeking reliable supply, 
+              fill out the form below and we'll get back to you within 24-48 hours.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-lg p-8 shadow-lg border border-border">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Partner Type Selection */}
+              <div>
+                <label className="block text-sm font-medium mb-3">I want to join as: *</label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, partnerType: 'farmer' })}
+                    disabled={isSubmitting}
+                    className={`p-4 border-2 rounded-lg text-left transition-all ${
+                      formData.partnerType === 'farmer'
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                  >
+                    <div className="text-2xl mb-2">🌱</div>
+                    <div className="font-semibold">Farmer / Supplier</div>
+                    <div className="text-sm text-muted-foreground mt-1">
+                      I grow vegetables and want market access
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, partnerType: 'retailer' })}
+                    disabled={isSubmitting}
+                    className={`p-4 border-2 rounded-lg text-left transition-all ${
+                      formData.partnerType === 'retailer'
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                  >
+                    <div className="text-2xl mb-2">🏪</div>
+                    <div className="font-semibold">Retailer / Buyer</div>
+                    <div className="text-sm text-muted-foreground mt-1">
+                      I need reliable vegetable supply
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Name */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Full Name / Business Name *</label>
+                <input 
+                  type="text" 
+                  placeholder="Your name or business name" 
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  disabled={isSubmitting}
+                  required
+                />
+              </div>
+
+              {/* Email and Phone */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Email Address</label>
+                  <input 
+                    type="email" 
+                    placeholder="your@email.com" 
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    disabled={isSubmitting}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Phone Number *</label>
+                  <input 
+                    type="tel" 
+                    placeholder="+250 XXX XXX XXX" 
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    disabled={isSubmitting}
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Location */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Location *</label>
+                <input 
+                  type="text" 
+                  placeholder="District, Sector (e.g., Kigali, Gasabo)" 
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  value={formData.location}
+                  onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                  disabled={isSubmitting}
+                  required
+                />
+              </div>
+
+              {/* Details */}
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  {formData.partnerType === 'farmer' 
+                    ? 'Tell us about your farm (crops, farm size, production capacity)' 
+                    : formData.partnerType === 'retailer'
+                    ? 'Tell us about your business (type, volume needs, delivery frequency)'
+                    : 'Additional details about your interest in partnering with VegInn'
+                  }
+                </label>
+                <textarea 
+                  placeholder="Please provide relevant details..."
+                  rows={5}
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                  value={formData.details}
+                  onChange={(e) => setFormData({ ...formData, details: e.target.value })}
+                  disabled={isSubmitting}
+                ></textarea>
+              </div>
+
+              {/* Submit Button */}
+              <Button 
+                type="submit" 
+                className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 text-lg"
+                disabled={isSubmitting || !formData.partnerType}
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Submitting Request...
+                  </span>
+                ) : (
+                  'Submit Partnership Request'
+                )}
+              </Button>
+
+              <p className="text-sm text-muted-foreground text-center">
+                We'll review your request and contact you within 24-48 hours to discuss next steps.
+              </p>
+            </form>
           </div>
         </div>
       </section>

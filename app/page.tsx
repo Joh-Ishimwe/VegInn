@@ -32,7 +32,7 @@ export default function Home() {
         subtitle="We connect smallholder farmers to modern retail markets through professional aggregation, quality assurance, and reliable distribution."
       
         ctaButtons={[
-          { label: 'Partner With Us', href: '#partnership', variant: 'default' },
+          { label: 'Partner With Us', href: '/partners#partnership-form', variant: 'default' },
           // { label: 'Learn More', href: '#about', variant: 'outline' }
         ]}
       />
@@ -97,8 +97,7 @@ export default function Home() {
               images={distributorImages}
               title=" Retailers"
               subtitle="Access quality produce consistently"
-              buttonUrl="#"
-            />
+              buttonUrl="#" buttonLabel={''}            />
           </div>
         </div>
       </section>
