@@ -37,7 +37,7 @@ export default function Home() {
         ]}
       />
 
-      {/* Our Products Section */}
+      {/* Our Products Section 
       <section className="py-16 md:py-24 bg-background">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
@@ -67,6 +67,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
 
       {/* Who We Are Section */}
       <section className="py-16 md:py-24 bg-secondary/30">
@@ -96,7 +97,7 @@ export default function Home() {
             </div>
             <OverlayCard
               images={distributorImages}
-              title="For Retailers"
+              title=" Retailers"
               subtitle="Access quality produce consistently"
               buttonUrl="#"
             />
