@@ -1,7 +1,8 @@
 // /app/layout.tsx
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import 'leaflet/dist/leaflet.css'
@@ -9,6 +10,17 @@ import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' }
+  ],
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://veginn.rw'),
@@ -118,13 +130,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <script
+      <body className="font-sans antialiased flex flex-col min-h-screen">
+        <Script
+          id="json-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="font-sans antialiased flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-1">
           {children}
