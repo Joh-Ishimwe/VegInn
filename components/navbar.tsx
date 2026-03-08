@@ -21,7 +21,7 @@ export function Navbar() {
         <nav className="hidden md:flex gap-8 items-center text-sm">
           <Link href="/" className="hover:text-primary transition">Home</Link>
           <Link href="/about" className="hover:text-primary transition">About Us</Link>
-          <Link href="/partners" className="hover:text-primary transition">Partners</Link>
+          <Link href="/partners" className="hover:text-primary transition">Partner With Us</Link>
           <Link href="/careers" className="hover:text-primary transition">Careers</Link>
           <Link href="/contact" className="hover:text-primary transition">Contact</Link>
         </nav>
