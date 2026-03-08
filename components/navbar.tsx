@@ -41,7 +41,7 @@ export function Navbar() {
           <nav className="flex flex-col p-4 gap-4 text-sm">
             <Link href="/" className="hover:text-primary transition">Home</Link>
             <Link href="/about" className="hover:text-primary transition">About Us</Link>
-            <Link href="/partners" className="hover:text-primary transition">Partners</Link>
+            <Link href="/partner" className="hover:text-primary transition">Partner with Us</Link>
             <Link href="/careers" className="hover:text-primary transition">Careers</Link>
             <Link href="/contact" className="hover:text-primary transition">Contact</Link>
           </nav>
