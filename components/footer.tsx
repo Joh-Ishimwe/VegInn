@@ -31,6 +31,9 @@ export function Footer() {
               <Link href="/careers" className="text-sm text-muted-foreground hover:text-primary transition">
                 Careers
               </Link>
+              <Link href="/partners" className="text-sm text-muted-foreground hover:text-primary transition">
+                Partner With Us
+              </Link>
               <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary transition">
                 Contact
               </Link>
@@ -78,6 +81,10 @@ export function Footer() {
         {/* Copyright */}
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} VegInn. All rights reserved.</p>
+          <div className="mt-3 flex justify-center gap-4">
+            <Link href="/privacy" className="hover:text-primary transition">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-primary transition">Terms of Use</Link>
+          </div>
         </div>
       </div>
     </footer>
