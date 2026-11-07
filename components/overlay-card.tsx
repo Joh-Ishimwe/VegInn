@@ -103,7 +103,7 @@ export function OverlayCard({
           {subtitle}
         </p>
         <Button
-          size="md"
+          size="default"
           asChild
           className="bg-primary hover:bg-primary/90 text-primary-foreground mt-auto"
         >
