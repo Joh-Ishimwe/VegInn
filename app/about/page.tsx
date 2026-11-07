@@ -1,6 +1,7 @@
 // /app/about/page.tsx
 'use client'
 
+import { ShieldCheck, Sprout, HeartHandshake } from 'lucide-react'
 import { HeroSection } from '@/components/hero-section'
 
 export default function About() {
@@ -80,17 +81,17 @@ export default function About() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-3">✓</div>
+              <ShieldCheck size={40} className="mx-auto text-primary mb-3" aria-hidden="true" />
               <h3 className="text-xl font-bold mb-2">Integrity</h3>
               <p className="text-muted-foreground">Fair pricing, transparent operations, and honest relationships with all partners</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-3">✓</div>
+              <Sprout size={40} className="mx-auto text-primary mb-3" aria-hidden="true" />
               <h3 className="text-xl font-bold mb-2">Quality</h3>
               <p className="text-muted-foreground">Uncompromising standards in produce handling, safety, and customer satisfaction</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-3">✓</div>
+              <HeartHandshake size={40} className="mx-auto text-primary mb-3" aria-hidden="true" />
               <h3 className="text-xl font-bold mb-2">Impact</h3>
               <p className="text-muted-foreground">Sustainable growth that benefits farmers, retailers, consumers, and communities</p>
             </div>
