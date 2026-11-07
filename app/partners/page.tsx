@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { HeroSection } from '@/components/hero-section'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
@@ -91,11 +92,7 @@ export default function Partners() {
             {/* Farmer Network Card */}
             <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
               <div className="relative h-64">
-                <img 
-                  src={farmerImages[0]} 
-                  alt="Farmer Network" 
-                  className="w-full h-full object-cover"
-                />
+                <Image src={farmerImages[0]} alt="Farmer Network" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                   <h3 className="text-2xl font-bold mb-2">Our Farmer Network</h3>
@@ -131,11 +128,7 @@ export default function Partners() {
             {/* Retail & Distribution Card */}
             <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
               <div className="relative h-64">
-                <img 
-                  src={retailerImages[0]} 
-                  alt="Retail & Distribution" 
-                  className="w-full h-full object-cover"
-                />
+                <Image src={retailerImages[0]} alt="Retail & Distribution" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                   <h3 className="text-2xl font-bold mb-2">Retail & Distribution</h3>
@@ -176,7 +169,7 @@ export default function Partners() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Who We Work With</h2>
-            <p className="text-lg text-muted-foreground">Our partnerships span across the entire agricultural value chain</p>
+            <p className="text-lg text-muted-foreground">Our partnerships span the entire agricultural value chain</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
