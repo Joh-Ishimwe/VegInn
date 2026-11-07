@@ -12,7 +12,8 @@ export default function Careers() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
-    email: ''
+    email: '',
+    consent: false
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -33,7 +34,7 @@ export default function Careers() {
           title: "✅ Subscribed Successfully!",
           description: "You'll receive updates on job openings, training programs, and workshops.",
         })
-        setFormData({ name: '', email: '' }) // Reset form
+        setFormData({ name: '', email: '', consent: false })
       } else {
         toast({
           title: "❌ Subscription Failed",
@@ -127,6 +128,21 @@ export default function Careers() {
                   required
                 />
               </div>
+
+              <label className="flex items-start gap-2 text-sm text-muted-foreground">
+                <input
+                  type="checkbox"
+                  checked={formData.consent}
+                  onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                  disabled={isSubmitting}
+                  required
+                  className="mt-1 accent-primary"
+                />
+                <span>
+                  I agree to receive opportunity updates from VegInn. I can unsubscribe at any time.
+                  {' '}<Link href="/privacy" className="text-primary underline">Privacy Policy</Link>
+                </span>
+              </label>
 
               <Button 
                 type="submit" 
