@@ -138,8 +138,12 @@ netlify deploy --prod
 If you need environment variables:
 
 1. In Vercel Dashboard → Settings → Environment Variables
-2. Add your variables (e.g., API keys)
+2. Add both variables for production email delivery:
+   - `RESEND_API_KEY`: your Resend API key
+   - `RESEND_FROM_EMAIL`: a sender address on a domain verified in Resend, such as `VegInn <hello@veginn.rw>`
 3. Redeploy for changes to take effect
+
+Do not use `onboarding@resend.dev` in production. It is only a development fallback and may not deliver reliably from your business domain.
 
 ---
 

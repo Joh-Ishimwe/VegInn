@@ -1,18 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
+import { escapeHtml, getEmailFrom } from '@/lib/email'
+import { getClientAddress, isRateLimited } from '@/lib/rate-limit'
 
 // Initialize Resend with fallback for build time
 const resend = new Resend(process.env.RESEND_API_KEY || 'placeholder')
 
 // Validation schema
 const subscribeSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
+  name: z.string().trim().min(2, 'Name must be at least 2 characters').max(100, 'Name is too long'),
   email: z.string().email('Invalid email address'),
+  consent: z.literal(true, { error: 'Please agree to receive updates' }),
 })
 
 export async function POST(request: NextRequest) {
   try {
+    if (isRateLimited(`subscribe:${getClientAddress(request)}`)) {
+      return NextResponse.json({ error: 'Too many requests. Please try again in a minute.' }, { status: 429 })
+    }
+
     // Check if API key is configured
     if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'placeholder') {
       return NextResponse.json(
@@ -28,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     // Send notification email to VegInn
     const { data, error } = await resend.emails.send({
-      from: 'VegInn Subscriptions <onboarding@resend.dev>',
+      from: getEmailFrom('VegInn Subscriptions'),
       to: 'info@veginn.rw',
       replyTo: validatedData.email,
       subject: '🆕 New Newsletter Subscription',
@@ -59,12 +66,12 @@ export async function POST(request: NextRequest) {
                 
                 <div class="info-row">
                   <div class="label">👤 Name:</div>
-                  <div class="value">${validatedData.name}</div>
+                  <div class="value">${escapeHtml(validatedData.name)}</div>
                 </div>
 
                 <div class="info-row">
                   <div class="label">📧 Email:</div>
-                  <div class="value">${validatedData.email}</div>
+                  <div class="value">${escapeHtml(validatedData.email)}</div>
                 </div>
 
                 <div class="info-row">
@@ -98,7 +105,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: error.errors[0].message },
+        { error: error.issues[0].message },
         { status: 400 }
       )
     }

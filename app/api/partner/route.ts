@@ -1,24 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
+import { escapeHtml, getEmailFrom, sanitizeHeader } from '@/lib/email'
+import { getClientAddress, isRateLimited } from '@/lib/rate-limit'
 
 // Initialize Resend with fallback for build time
 const resend = new Resend(process.env.RESEND_API_KEY || 'placeholder')
 
 // Validation schema
 const partnerSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
+  name: z.string().trim().min(2, 'Name must be at least 2 characters').max(100, 'Name is too long'),
   email: z.string().email('Invalid email address').optional().or(z.literal('')),
-  phone: z.string().min(10, 'Phone number must be at least 10 digits'),
+  phone: z.string().trim().min(10, 'Phone number must be at least 10 digits').max(30, 'Phone number is too long'),
   partnerType: z.enum(['farmer', 'retailer'], {
-    errorMap: () => ({ message: 'Please select a partner type' })
+    error: 'Please select a partner type'
   }),
-  location: z.string().min(2, 'Location is required'),
-  details: z.string().optional(),
+  location: z.string().trim().min(2, 'Location is required').max(200, 'Location is too long'),
+  details: z.string().trim().max(5000, 'Details are too long').optional(),
 })
 
 export async function POST(request: NextRequest) {
   try {
+    if (isRateLimited(`partner:${getClientAddress(request)}`)) {
+      return NextResponse.json({ error: 'Too many requests. Please try again in a minute.' }, { status: 429 })
+    }
+
     // Check if API key is configured
     if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'placeholder') {
       return NextResponse.json(
@@ -36,10 +42,10 @@ export async function POST(request: NextRequest) {
 
     // Send notification email to VegInn
     const { data, error } = await resend.emails.send({
-      from: 'VegInn Partnership <onboarding@resend.dev>',
+      from: getEmailFrom('VegInn Partnership'),
       to: 'info@veginn.rw',
       replyTo: validatedData.email,
-      subject: `${partnerTypeLabel} Partnership Request from ${validatedData.name}`,
+      subject: `${partnerTypeLabel} Partnership Request from ${sanitizeHeader(validatedData.name)}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -70,22 +76,22 @@ export async function POST(request: NextRequest) {
                 
                 <div class="info-row">
                   <div class="label">👤 Name:</div>
-                  <div class="value">${validatedData.name}</div>
+                  <div class="value">${escapeHtml(validatedData.name)}</div>
                 </div>
 
                 <div class="info-row">
                   <div class="label">📧 Email:</div>
-                  <div class="value">${validatedData.email || 'Not provided'}</div>
+                  <div class="value">${escapeHtml(validatedData.email || 'Not provided')}</div>
                 </div>
 
                 <div class="info-row">
                   <div class="label">📱 Phone:</div>
-                  <div class="value">${validatedData.phone}</div>
+                  <div class="value">${escapeHtml(validatedData.phone)}</div>
                 </div>
 
                 <div class="info-row">
                   <div class="label">📍 Location:</div>
-                  <div class="value">${validatedData.location}</div>
+                  <div class="value">${escapeHtml(validatedData.location)}</div>
                 </div>
 
                 <div class="info-row">
@@ -95,7 +101,7 @@ export async function POST(request: NextRequest) {
 
                 <div class="details-box">
                   <div class="label">💬 Additional Details:</div>
-                  <p style="margin: 10px 0 0 0; white-space: pre-wrap;">${validatedData.details || 'No additional details provided'}</p>
+                  <p style="margin: 10px 0 0 0; white-space: pre-wrap;">${escapeHtml(validatedData.details || 'No additional details provided')}</p>
                 </div>
 
                 <div class="info-row">
@@ -129,7 +135,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: error.errors[0].message },
+        { error: error.issues[0].message },
         { status: 400 }
       )
     }

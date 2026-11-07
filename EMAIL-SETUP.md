@@ -68,11 +68,11 @@ pnpm dev
 ## ✉️ Email Configuration
 
 ### Default Settings:
-- **From:** `VegInn Contact Form <onboarding@resend.dev>`
+- **From:** The `RESEND_FROM_EMAIL` environment variable
 - **To:** `info@veginn.rw`
 - **Reply-To:** Customer's email
 
-### Using Your Own Domain (Optional - Recommended):
+### Using Your Own Domain (Recommended):
 
 1. **Add Domain in Resend:**
    - Go to https://resend.com/domains
@@ -80,11 +80,8 @@ pnpm dev
    - Enter: `veginn.rw`
    - Follow instructions to add DNS records
 
-2. **Update API Route:**
-   Edit `app/api/contact/route.ts`:
-   ```typescript
-   from: 'VegInn Contact <contact@veginn.rw>', // Instead of onboarding@resend.dev
-   ```
+2. **Configure the sender:**
+   Add `RESEND_FROM_EMAIL=VegInn <contact@veginn.rw>` to your local `.env.local` and your Vercel environment variables.
 
 3. **Benefits:**
    - Professional email address

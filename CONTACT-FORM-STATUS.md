@@ -84,13 +84,13 @@ Wait 1-2 minutes for deployment to complete
 ## 📧 Email Details
 
 **Current Configuration:**
-- From: `VegInn Contact Form <onboarding@resend.dev>` (Resend test address)
+- From: `RESEND_FROM_EMAIL` (a Resend-verified business address)
 - To: `info@veginn.rw` (your business email)
 - Reply-To: Customer's email (so you can reply directly)
 - Format: HTML with clean styling
 
-**Future Enhancement (Optional):**
-Set up custom domain (veginn.rw) in Resend to send from `contact@veginn.rw` instead of `onboarding@resend.dev`
+**Recommended production setup:**
+Set `RESEND_FROM_EMAIL` to a verified address such as `VegInn <contact@veginn.rw>`
 - Better deliverability
 - More professional
 - See EMAIL-SETUP.md for instructions
