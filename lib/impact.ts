@@ -15,7 +15,7 @@ export const farmerStory = {
   verified: true,
   name: 'Uwintije Clemantine',
   location: 'Karenge, Rwamagana',
-  image: '/farmer-2.jpg',
+  image: '/farmer.jpg',
   quote:
     'I no longer worry. My harvest already has buyers while the crops are still growing.',
   before:
