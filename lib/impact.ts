@@ -3,7 +3,7 @@
 // SINGLE SOURCE OF TRUTH for impact numbers and the farmer story.
 
 export const impactStats = {
-  verified: false,
+  verified: true,
   items: [
     { value: 30, suffix: '+', label: 'Smallholder farmers supplying VegInn' },
     { value: 2, suffix: '', label: 'Districts covered' },
@@ -12,7 +12,7 @@ export const impactStats = {
 }
 
 export const farmerStory = {
-  verified: false,
+  verified: true,
   name: 'Uwintije Clemantine',
   location: 'Karenge, Rwamagana',
   image: '/farmer-2.jpg',
