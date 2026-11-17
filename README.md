@@ -97,7 +97,7 @@ components/          page sections (hero, impact stats, farmer story, map, navba
   ui/                shared UI building blocks (shadcn/ui)
 lib/                 email safety, rate limiting, impact numbers, helpers
 public/              images and icons
-docs/                setup guides (email, deployment, SEO) and screenshots
+docs/                deployment notes and screenshots
 ```
 
 ## Run it locally
@@ -116,7 +116,7 @@ pnpm build           # production build (fails on type errors, by design)
 npx tsc --noEmit     # type-check only
 ```
 
-Deployment, email and SEO setup are documented in [`docs/`](docs/).
+Deployment, environment variables and SEO are covered in [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ---
 
